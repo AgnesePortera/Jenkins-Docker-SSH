@@ -36,11 +36,12 @@ After that starts Docker-compose:
 
 `docker-compose up`
 
-In this way the first time, the image is builded and after that the two container are running:
+In this way the image is builded and after that the two container are running:
 
 `docker ps`
 
 If the two container are not running, please check the status with docker log.
+
 Open the browser in *localhost:8080* and start the JENKINS installation.
 
 ## SSH
