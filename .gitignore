@@ -1,3 +1,4 @@
 remote-key
 remote-key.pub
 jenkins_home/
+*.html
