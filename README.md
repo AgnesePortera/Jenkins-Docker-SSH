@@ -38,7 +38,7 @@ In this way the first time, the image is builded and after that the two containe
 If the two container are not running, please check the status with docker log.
 Open the browser in *localhost:8080* and start the JENKINS installation.
 
-### SSH
+## SSH
 
 Copy the SSH private key inside the Jenkins container with the following command:
 
@@ -54,6 +54,18 @@ After that start the SSH connection from the Jenkins container to the remote-hos
 
 `ssh -i remote-key remote_user@remote_host`
 
+### Jenkins 
+From the Jenkins panel, is it possible to add a Global credential of type *SSH username with private key* with the same key previously generated.
+After that it can be added an *SSH remote host* from Dashboard->Manage Jenkins->Configure System, using:
+
+* Hostname = remote_host (that is the container name)
+* Port= 22
+* Credentials = select the one previously added
+
+Finally check the connection.
+
+Now it is possible to create a JOB that execute shell script on remote host using SSH.
+In this case the remote host it's the DOCKER CONTAINER!
 
 ## Contributing
 
