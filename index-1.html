@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unknown </title></head><body>
+<h1 id="readme">README</h1>
+<p><img alt="Docker" src="https://img.shields.io/badge/docker-v20.10.5-blue" />
+<img alt="Jenkins" src="https://img.shields.io/badge/Jenkins-ARM-red" />
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/AgnesePortera/Jenkins-Docker-SSH" />
+<img alt="GitHub" src="https://img.shields.io/github/license/AgnesePortera/Jenkins-Docker-SSH?style=plastic" />
+<img alt="GitHub" src="https://img.shields.io/github/last-commit/AgnesePortera/Jenkins-Docker-SSH" /></p>
+<p>Docker application with Jenkins and SSH server.
+The network is composed by two containers:</p>
+<ul>
+<li>
+<p><strong>jenkins</strong> with an image from <a href="https://hub.docker.com/r/jenkins4eval/jenkins">Docker Hub</a> applicable to ARM processor.</p>
+</li>
+<li>
+<p><strong>remote-host</strong> with a CentOS 7 system in which is installed the openssh-server (see the <em>centos7/Dockerfile</em> for the implementation).</p>
+</li>
+</ul>
+<p>Both the containers are in the same virtual network called <em>net</em> .</p>
+<p><img alt="preview config" src="https://github.com/AgnesePortera/Jenkins-Docker-SSH/blob/master/schema.png" /></p>
+<h3 id="how-to-run-the-project">How to run the project</h3>
+<p>After pulling the project locally, create the SSH key inside the <em>centos7</em> folder:</p>
+<p><code>ssh-keygen -f remote-key -m PEM</code></p>
+<p>Open the file with <code>cat remote-key</code> and check that the first line is:</p>
+<p><code>------BEGIN RSA PRIVATE KEY------</code></p>
+<p>After that starts Docker-compose:</p>
+<p><code>docker-compose up</code></p>
+<p>In this way the first time, the image is builded and after that the two container are running:</p>
+<p><code>docker ps</code></p>
+<p>If the two container are not running, please check the status with docker log.
+Open the browser in <em>localhost:8080</em> and start the JENKINS installation.</p>
+<h2 id="ssh">SSH</h2>
+<p>Copy the SSH private key inside the Jenkins container with the following command:</p>
+<p><code>docker cp remote-ki jenkins:/tmp/remote-key</code></p>
+<p>Start a bash command in the container and check if the file is present:</p>
+<p><code>docker exec -it jenkins bash</code></p>
+<p>Move in <em>tmp</em> directory and check with <code>cat remote-key</code> if the key is the correct one.</p>
+<p>After that start the SSH connection from the Jenkins container to the remote-host:</p>
+<p><code>ssh -i remote-key remote_user@remote_host</code></p>
+<h3 id="jenkins">Jenkins</h3>
+<p>From the Jenkins panel, is it possible to add a Global credential of type <em>SSH username with private key</em> with the same key previously generated.
+After that it can be added an <em>SSH remote host</em> from Dashboard-&gt;Manage Jenkins-&gt;Configure System, using:</p>
+<ul>
+<li>Hostname = remote_host (that is the container name)</li>
+<li>Port= 22</li>
+<li>Credentials = select the one previously added</li>
+</ul>
+<p>Finally check the connection.</p>
+<p>Now it is possible to create a JOB that execute shell script on remote host using SSH.
+In this case the remote host it's the DOCKER CONTAINER!</p>
+<h2 id="contributing">Contributing</h2>
+<p>Bug reports and pull requests are welcome on GitHub at https://github.com/AgnesePortera/Jenkins-Docker-SSH/.
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the
+<a href="https://github.com/AgnesePortera/Jenkins-Docker-SSH/blob/master/CODE_OF_CONDUCT.md">code of conduct</a>.</p>
+<h2 id="code-of-conduct">Code of Conduct</h2>
+<p>Everyone interacting in the Notification Bot project's codebases, issue trackers, chat rooms and mailing lists is
+expected to follow
+the <a href="https://github.com/AgnesePortera/Jenkins-Docker-SSH/blob/master/CODE_OF_CONDUCT.md">code of conduct</a>.</p>
+<h2 id="license">License</h2>
+<p>This project is distributed under <em>MIT</em> license.</p>
+</body></html>
