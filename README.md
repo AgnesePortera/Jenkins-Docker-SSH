@@ -7,7 +7,9 @@
 ![GitHub](https://img.shields.io/github/last-commit/AgnesePortera/Jenkins-Docker-SSH)
 
 In a little Raspberry Pi 4 you can start a Jenkins application that comunicates with a SSH server.
+
 Really??
+
 Yes! Using Docker :smile:
 
 The network is composed by two containers:
@@ -45,7 +47,7 @@ Open the browser in *localhost:8080* and start the JENKINS installation.
 
 Copy the SSH private key inside the Jenkins container with the following command:
 
-`docker cp remote-ki jenkins:/tmp/remote-key`
+`docker cp remote-key jenkins:/tmp/remote-key`
 
 Start a bash command in the container and check if the file is present:
 
@@ -68,7 +70,7 @@ After that it can be added an *SSH remote host* from Dashboard->Manage Jenkins->
 Finally check the connection.
 
 Now it is possible to create a JOB that execute shell script on remote host using SSH.
-In this case the remote host it's the DOCKER CONTAINER!
+In this case the remote host it's the Docker container itself.
 
 ## Contributing
 
