@@ -6,7 +6,7 @@
 ![GitHub](https://img.shields.io/github/license/AgnesePortera/Jenkins-Docker-SSH?style=plastic)
 ![GitHub](https://img.shields.io/github/last-commit/AgnesePortera/Jenkins-Docker-SSH)
 
-In a little Raspberry Pi 4 you can start a Jenkins application that comunicates with a SSH server.
+In a little Raspberry Pi 4 you can start a Jenkins application that communicates with a SSH server.
 
 Really??
 
